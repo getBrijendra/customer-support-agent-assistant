@@ -42,6 +42,10 @@ See [architecture.md](architecture.md) for diagrams and the key decisions, and
 5. Run `uv run uvicorn app.main:app --reload` and open <http://127.0.0.1:8000/docs>.
 6. Run `uv run pytest -m unit` for the Docker-free test tier.
 
+**Web console (optional):** with the API running, `cd frontend && npm install && npm run dev`
+(or `make fe-install fe-dev`) and open <http://127.0.0.1:3000>. Sign in with an agent or admin
+key. See [frontend/README.md](frontend/README.md).
+
 > **Ports:** PGlite listens on `55432`. The optional Supabase CLI stack uses DB `55422` and Studio
 > `55423`, so both can be installed without a port collision.
 

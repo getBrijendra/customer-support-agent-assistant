@@ -9,6 +9,7 @@ RUN = $(UV) run
 help:
 	@echo "install | db-pglite | db-up | db-down | db-reset | db-status | migrate | seed | seed-offline | eval | run"
 	@echo "test-unit | test-integration | test-integration-postgres | test | test-live | lint | format | typecheck | check"
+	@echo "fe-install | fe-dev | fe-build | fe-start | fe-check"
 
 install:
 	$(UV) sync
@@ -75,3 +76,21 @@ typecheck:
 	$(RUN) mypy app
 
 check: lint typecheck test
+
+# ---------------------------------------------------------------- frontend (Next.js, ./frontend)
+.PHONY: fe-install fe-dev fe-build fe-start fe-check
+
+fe-install:
+	cd frontend && npm install
+
+fe-dev:        ## Next.js dev server on http://127.0.0.1:3000 (needs the API on :8000)
+	cd frontend && npm run dev
+
+fe-build:
+	cd frontend && npm run build
+
+fe-start:
+	cd frontend && npm run start
+
+fe-check:      ## lint + typecheck + unit tests for the frontend
+	cd frontend && npm run lint && npm run typecheck && npm test
